@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- user & AI grid -->
+    <div class="container">
+        <div class="grid-user">
+
+        </div>
+        <div class="grid-computer">
+
+        </div>
+    </div>
+
+    <!-- miscellaneous -->
+    <div class="miscellaneous-info">
+        <button id="start">Start</button>
+        <button id="rotate">Rotate ship</button>
+        <h3 id="whose-go">Your Go</h3>
+        <h3 id="info"></h3>
+    </div>
+
+
+    <!-- drag and drop ships-->
+    <!-- every ship has its own div with id so we could drag and drop -->
+    <div class="grid-display">
+        <div class="ship destroyer-container" draggable="true">
+            <div id="destroyer0"></div>
+            <div id="destroyer1"></div>
+        </div>
+        <div class="ship submarine-container" draggable="true">
+            <div id="submarine0"></div>
+            <div id="submarine1"></div>
+            <div id="submarine2"></div>
+        </div>
+        <div class="ship cruiser-container" draggable="true">
+            <div id="cruiser0"></div>
+            <div id="cruiser1"></div>
+            <div id="cruiser2"></div>
+        </div>
+        <div class="ship battleship-container" draggable="true">
+            <div id="battleship0"></div>
+            <div id="battleship1"></div>
+            <div id="battleship2"></div>
+            <div id="battleship3"></div>
+        </div>
+        <div class="ship carrier-container" draggable="true">
+            <div id="carrier0"></div>
+            <div id="carrier1"></div>
+            <div id="carrier2"></div>
+            <div id="carrier3"></div>
+            <div id="carrier4"></div>
+        </div>
+    </div>
+</body>
+
+</html>

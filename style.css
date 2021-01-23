@@ -1,0 +1,82 @@
+.container{
+    display: flex;
+}
+/* ai gird */
+.grid-user{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: blueviolet;
+
+}
+/* user grid */
+.grid-computer{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: green;
+
+}
+
+.grid-user  div{
+    /* any  div inside grid */
+width: 40px;
+height: 40px;
+
+}
+.grid-computer  div{
+    /* any  div inside grid */
+width: 40px;
+height: 40px;
+
+}
+ /* drag and drop box */
+.grid-display{
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    background-color: pink;
+}
+
+.destroyer-container{
+    width: 80px;
+    height: 40px;
+    background-color: orange;
+    display: flex;
+}
+/* ship submarine */
+.submarine-container{
+    width: 120px;
+    height: 40px;
+    background-color: magenta;
+    display: flex;
+}
+/* ship cruiser */
+.cruiser-container{
+    width: 120px;
+    height: 40px;
+    background-color: red;
+    display: flex;
+}
+/* ship battleship */
+.battleship-container{
+    width: 160px;
+    height: 40px;
+    background-color: aqua;
+    display: flex;
+}
+/* ship carrier */
+.carrier-container{
+    width: 200px;
+    height: 40px;
+    background-color: green;
+    display: flex;
+}
+
+/* any  div inside grid */
+.ship div{
+    width: 40px;
+    height: 40px;
+}
