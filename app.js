@@ -124,6 +124,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // checks is ship div taken or not
-        const isTaken = corrent.some(index => computerSquares[randomStart + index].classList.add('taken', ship.name))
+        // corrent.some checks if some of the squares are not taken
+        // in computerSquares takes random number and checks if any indexs has taken
+        // if there is taken then isTaken = true
+        const isTaken = corrent.some(index => computerSquares[randomStart + index].classList.contains('taken'))
+
+        // checks if some of the ship square are in div with id 9 (if div id ends with 9 then its at right edge)
+        const isAtRightEdge = corrent.some(index => (randomStart + index) % width === width - 1)
+        // checks if dev id ends with 0
+        const isAtLeftEdge = corrent.some(index => (randomStart + index) % width === 0)
+
+        // ! : is not
+        // .index Search for a given element
+        // checks if its not isTaken, isAtLeftEdge or isAtRightEdge
+        // then for current element takes randomStart and adds 'taken' and takes shipname in computerSquares (line 48)
+        // randomStart: line 121
+        if (!isTaken && !isAtLeftEdge && !isAtRightEdge) current.forEach(index => computerSquares[randomStart + index].classList.add('taken', ship.name))
     }
 })
