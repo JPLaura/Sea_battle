@@ -16,7 +16,7 @@
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    background-color: green;
+    background-color: black;
 
 }
 
@@ -39,12 +39,19 @@ height: 40px;
     margin: 10px;
     background-color: pink;
 }
-
+/* destroyer */
 .destroyer-container{
     width: 80px;
     height: 40px;
     background-color: orange;
     display: flex;
+}
+.destroyer-container-vertical{
+    width: 40px;
+    height: 80px;
+    background-color: orange;
+    display: flex;
+    flex-wrap: wrap;
 }
 /* ship submarine */
 .submarine-container{
@@ -52,6 +59,14 @@ height: 40px;
     height: 40px;
     background-color: magenta;
     display: flex;
+
+}
+.submarine-container-vertical{
+    width: 40px;
+    height: 120px;
+    background-color: magenta;
+    display: flex;
+    flex-wrap: wrap;
 }
 /* ship cruiser */
 .cruiser-container{
@@ -60,12 +75,26 @@ height: 40px;
     background-color: red;
     display: flex;
 }
+.cruiser-container-vertical{
+    width: 40px;
+    height: 120px;
+    background-color: red;
+    display: flex;
+    flex-wrap: wrap;
+}
 /* ship battleship */
 .battleship-container{
     width: 160px;
     height: 40px;
     background-color: aqua;
     display: flex;
+}
+.battleship-container-vertical{
+    width: 40px;
+    height: 160px;
+    background-color: aqua;
+    display: flex;
+    flex-wrap: wrap;
 }
 /* ship carrier */
 .carrier-container{
@@ -74,9 +103,34 @@ height: 40px;
     background-color: green;
     display: flex;
 }
-
+.carrier-container-vertical{
+    width: 40px;
+    height: 200px;
+    background-color: green;
+    display: flex;
+    flex-wrap: wrap;
+}
 /* any  div inside grid */
 .ship div{
     width: 40px;
     height: 40px;
+}
+
+
+/*
+makes ships appear in gameboard */
+.destroyer{
+    background-color: orange;
+}
+.submarine{
+    background-color: pink;
+}
+.cruiser{
+    background-color: purple;
+}
+.battleship{
+    background-color: aqua;
+}
+.carrier{
+    background-color: green;
 }

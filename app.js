@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const userSquares = []
     const computerSquares = []
 
+    // i added this bc then it will be easier to rotate ships
+    let isHorizontal = true
+
 
     // create board
     function createBoard(grid, squares, width) {
@@ -43,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createBoard(computerGrid, computerSquares, width)
 
     // SHIPS
-    const ShipArray = [
+    const shipArray = [
         {
             name: 'destroyer',
             directions: [
@@ -94,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // div ids would be 0, 10, 20...
                 [0, width, width * 2, width * 3, width * 4]
             ]
-        }
+        },
     ]
 
 
@@ -118,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // random square on computerSquares with max length of 100
         // 100 bc theres 100 divs in grid-computer
         // ship.direction[0].length * direction bc ship woud not appear outside of the box
-        let ranomStart = Math.floor(Math.random()) * computerSquares.length - (ship.direction[0].length * direction)
+        // Math.abs returns absolute  value
+        let randomStart = Math.abs(Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length * direction)))
 
 
 
@@ -127,18 +131,134 @@ document.addEventListener('DOMContentLoaded', () => {
         // corrent.some checks if some of the squares are not taken
         // in computerSquares takes random number and checks if any indexs has taken
         // if there is taken then isTaken = true
-        const isTaken = corrent.some(index => computerSquares[randomStart + index].classList.contains('taken'))
+        const isTaken = current.some(index => computerSquares[randomStart + index].classList.contains('taken'))
 
         // checks if some of the ship square are in div with id 9 (if div id ends with 9 then its at right edge)
-        const isAtRightEdge = corrent.some(index => (randomStart + index) % width === width - 1)
+        const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1)
         // checks if dev id ends with 0
-        const isAtLeftEdge = corrent.some(index => (randomStart + index) % width === 0)
+        const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0)
 
         // ! : is not
         // .index Search for a given element
         // checks if its not isTaken, isAtLeftEdge or isAtRightEdge
         // then for current element takes randomStart and adds 'taken' and takes shipname in computerSquares (line 48)
         // randomStart: line 121
-        if (!isTaken && !isAtLeftEdge && !isAtRightEdge) current.forEach(index => computerSquares[randomStart + index].classList.add('taken', ship.name))
+        if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach(index => computerSquares[randomStart + index].classList.add('taken', ship.name))
+        // generates new ship until we can we tag 'taken'
+        else generate(ship)
     }
+
+    console.log(shipArray)
+
+    generate(shipArray[0])
+    generate(shipArray[1])
+    generate(shipArray[2])
+    generate(shipArray[3])
+    generate(shipArray[4])
+
+    // rotate the ships
+    function rotate() {
+        if (isHorizontal == true) {
+            // makes ships Horizontal if button is pressed
+            // destroyer-container-vertical is in css
+            destroyer.classList.toggle('destroyer-container-vertical')
+            submarine.classList.toggle('submarine-container-vertical')
+            cruiser.classList.toggle('cruiser-container-vertical')
+            battleship.classList.toggle('battleship-container-vertical')
+            carrier.classList.toggle('carrier-container-vertical')
+            isHorizontal = false
+            console.log(isHorizontal)
+            return
+        }
+        if (!isHorizontal) {
+            // makes ships vertical if button is pressed
+            destroyer.classList.toggle('destroyer-container-vertical')
+            submarine.classList.toggle('submarine-container-vertical')
+            cruiser.classList.toggle('cruiser-container-vertical')
+            battleship.classList.toggle('battleship-container-vertical')
+            carrier.classList.toggle('carrier-container-vertical')
+            isHorizontal = true
+            console.log(isHorizontal)
+            return
+        }
+    }
+    // takes button called and adds EventListener
+    // if button is clicked then it will trigger rotate function
+    rotateButton.addEventListener('click', rotate)
+
+    // drag user ship
+
+    // i brought up those variable bc it would be easier to reuse them if needed
+    // you can find what the do at
+    // line 204
+    let selectedShipNameWithIndex
+    // line 214
+    let draggedShip
+    // line 215
+    let draggedSipLength
+
+
+
+
+
+    // adds mousedown EventListener for every user draggable ship
+    ship.forEach(ship => ship.addEventListener('mousedown', (event) => {
+        // if it detects mousedown then it will add its ships id to selectedShipNameWithIndex
+        selectedShipNameWithIndex = event.target.id
+        console.log(selectedShipNameWithIndex)
+    }))
+
+
+    function dragStart(event) {
+        console.log(event.target)
+        // even in this function is dragStart
+        draggedShip = event.target
+        draggedSipLength = draggedShip.childNodes.length
+        console.log(draggedShip)
+        console.log(draggedSipLength, '')
+
+    }
+    function dragOver(event) {
+        event.preventDefault()
+    }
+    function dragEnter(event) {
+        event.preventDefault()
+    }
+    function dragLeave() {
+        console.log('dragLeave')
+    }
+    function dragDrop(event) {
+        // takes lastChild (last index & div) id
+        let shipNameWithLastId = draggedShip.lastChild.id
+        // .slice(0, -2) removes last 2  letters and leaves only the shipClass (ship name)
+        let shipClass = shipNameWithLastId.slice(0, -2)
+        console.log(shipClass)
+        // .substr(-1) takes the last letter from shipNameWithLastId (last letter is ships length)
+        // shipNameWithLastId.substr(-1) will return string but i need to make it as int so i could add it to index
+        let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
+        console.log(lastShipIndex, 'lastShipIndex')
+        // checks where the last ship div will be
+        // lastShipIndex is still ships length and event.target.dataset.id takes gameboard id where your mouse last was
+        let shipLastId = lastShipIndex + parseInt(event.target.dataset.id)
+        console.log(shipLastId, 'where the last index will be')
+        console.log(parseInt(event.target.dataset.id), 'mouse last ID on gameboard ')
+    }
+    function dragEnd(event) {
+
+    }
+
+
+
+
+
+    // for each ship it adds addEventListener and it listens dragstart event
+    // all drags are js events
+    ship.forEach(ship => ship.addEventListener('dragstart', dragStart))
+    // same thing with ship but this time its userSquares
+    userSquares.forEach(square => square.addEventListener('dragstart', dragStart))
+    userSquares.forEach(square => square.addEventListener('dragover', dragOver))
+    userSquares.forEach(square => square.addEventListener('dragenter', dragEnter))
+    userSquares.forEach(square => square.addEventListener('dragleave', dragLeave))
+    userSquares.forEach(square => square.addEventListener('drop', dragDrop))
+    userSquares.forEach(square => square.addEventListener('dragend', dragEnd))
 })
